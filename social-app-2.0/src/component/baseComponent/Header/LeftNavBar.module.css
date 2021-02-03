@@ -1,0 +1,41 @@
+.wrapper {
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.link {
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    text-decoration: none;
+}
+
+.link__logo {
+    height: 45px;
+    margin-right: 10px;
+}
+
+.link div {
+    font-size: 28px;
+    font-family: 'Poppins', sans-serif;
+    line-height: 45px;
+    color: #3f414d;
+}
+
+.btn{
+    vertical-align: middle;
+    margin-left: 10px;
+    background-color: inherit;
+    border:  none;
+    outline-style: none;
+}
+
+.btn img{
+    margin-top: 5px;
+}
+

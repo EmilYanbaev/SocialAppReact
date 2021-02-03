@@ -1,0 +1,17 @@
+.wrapp_content{
+    height: 100%;
+    margin: 0 250px;
+    flex-grow: 1;
+}
+
+@media (min-width:1300px) and (max-width: 1500px) {
+    .wrapp_content {
+        margin: 0 100px ;
+    }
+}
+
+@media (max-width: 1300px) {
+    .wrapp_content {
+        margin: 0 0;
+    }
+}

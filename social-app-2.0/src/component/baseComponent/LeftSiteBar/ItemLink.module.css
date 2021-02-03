@@ -1,0 +1,36 @@
+.link{
+    list-style: none;
+    text-decoration: none;
+    color:inherit;
+}
+
+.active{
+    color:#50b5ff;
+    background-color: #f5fbff;
+}
+
+.item{
+    margin: 0 15px;
+    padding:15px;
+    border-radius: 5px;
+    transition: all 0.45s ease 0s;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.item:hover{
+    color:#50b5ff;
+}
+
+.icon{
+    font-size: 10px;
+    margin-right: 10px;
+}
+
+@media (max-width: 1500px) {
+    .text {
+        display: none;
+    }
+}
