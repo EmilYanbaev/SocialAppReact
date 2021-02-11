@@ -4,9 +4,14 @@ import { Redirect, withRouter } from 'react-router-dom';
 
 export const withAuthRedirect = (Component) => {
     class AuthContainer extends React.Component {
-
         render() {
-            let path = this.props.isLogin ? "/profile":"/login"
+            let path
+            if (this.props.isLogin)
+                if (this.props.location.pathname === "/login")
+                    path = "/profile"
+                else
+                    path = this.props.location.pathname
+            else path = "/login"
             return (<>
                 <Component {...this.props} />
                 <Redirect to={path} />

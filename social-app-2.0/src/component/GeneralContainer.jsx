@@ -3,16 +3,19 @@ import LeftSiteBar from './baseComponent/LeftSiteBar/LeftSiteBar'
 import ContentPage from "./baseComponent/ContentPage"
 import RightSiteBar from './baseComponent/RightSiteBar/RightSiteBar'
 import { connect } from 'react-redux';
-import { authThunkCreator } from "../redux/reducers/authReducer"
 import { compose } from 'redux';
 import HeaderContainer from './baseComponent/Header/HeaderContainer';
+import { initialize } from './../redux/reducers/generalReducer';
+import Preloader from './otherComponent/Preloader';
 
 class GeneralContainer extends React.Component {
     componentDidMount() {
-        this.props.authMe();
+        this.props.initialize();
     }
     render() {
-        return (
+        if(!this.props.initialized)
+        return <Preloader />
+        else return ( 
             <div className="generalContainer">
                 <HeaderContainer />
                 <div className="wrapper">
@@ -26,7 +29,7 @@ class GeneralContainer extends React.Component {
 }
 
 const mapStateToProps = (state) => { return {
-    isLogin:state.auth.isLogin
+    initialized:state.general.initialized,
 } }
 export default compose(
-    connect(mapStateToProps, { authMe: authThunkCreator }))(GeneralContainer)
+    connect(mapStateToProps, { initialize:initialize }))(GeneralContainer)

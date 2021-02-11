@@ -1,7 +1,6 @@
 import { stopSubmit } from 'redux-form';
 import { userApi } from './../../serverApi/api';
 const SET_AUTH_DATA = "SET_AUTH_DATA";
-const INCORRECT_DATA = "INCORRECT_DATA"
 const CLEAR_DATA = "CLEAR_DATA_AUTH"
 
 
@@ -9,8 +8,7 @@ const initialState = {
     email: "",
     id: "",
     login: "",
-    isLogin: false,
-    incorrectData:false
+    isLogin: false
 }
 
 
@@ -18,8 +16,6 @@ let authReducer = (state = initialState, action) => {
     switch (action.type) {
         case SET_AUTH_DATA:
             return { ...state, ...action.data, isLogin: action.isLogin }
-        case INCORRECT_DATA:
-            return { ...state, incorrectData: action.incorrectData }
         case CLEAR_DATA:
             return initialState
         default:
@@ -27,21 +23,22 @@ let authReducer = (state = initialState, action) => {
     }
 }
 
-export let setAuth = (data, isLogin) => ({ type: SET_AUTH_DATA, data, isLogin })
+export default authReducer;
 
-export let incorrectData = (bool) => ({ type: INCORRECT_DATA, incorrectData: bool })
+export let setAuth = (data, isLogin) => ({ type: SET_AUTH_DATA, data, isLogin })
 
 export const clearData = () => ({ type: CLEAR_DATA })
 
 
 
-let authThunk = (dispatch) => {
-    userApi.getAuth().then(response => {
+export let authThunk = (dispatch) => {
+    return userApi.getAuth().then(response => {
         if (response.data.resultCode === 0)
             dispatch(setAuth(response.data.data, true))
         else
             dispatch(setAuth({}, false))
     })
+    
 }
 
 export let authThunkCreator = () => {
@@ -65,12 +62,10 @@ export let logOutThunkCreator = () => {
     return dispatch => {
         userApi.logout().then(
             response => {
-
                 dispatch(clearData())
-                authThunk(dispatch)
+                dispatch(authThunk)
             }
         )
     }
 }
 
-export default authReducer;
