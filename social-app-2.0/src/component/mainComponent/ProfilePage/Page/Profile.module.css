@@ -1,0 +1,127 @@
+.container{
+    
+    width: 70%;
+    margin: 10px auto;
+    padding: 10px;
+
+    display: flex;
+    flex-direction: row;
+}
+
+
+@media (max-width: 1300px) {
+    .container {
+        width: 100%;
+    }
+}
+
+@media (max-width:425px){
+    .container{
+        flex-direction: column;
+    }
+    .user{
+        width: 100%;
+        margin-right: 0px;
+        margin-bottom: 15px;
+    }
+    .userInfo{
+        width: 100%;
+    }
+}
+
+.user{
+    flex-basis: 30%;
+    max-height: 340px;
+    flex-shrink: 0;
+    margin-right: 15px;
+    padding: 20px;
+    border-radius: 5px;
+    background-color: white;
+    box-shadow: 0px 0px 20px 0px rgba(44, 101, 144, 0.1);
+}
+.user__photo{
+    min-height: 250px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    background-image: url("../assets/avatar.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.userInfo{
+    font-size: 16px;
+    flex-basis: 70%;
+    padding:20px;
+    border-radius: 5px;
+    background-color: white;
+    box-shadow: 0px 0px 20px 0px rgba(44, 101, 144, 0.1);
+    
+    display: flex;
+    flex-direction: column;
+}
+
+.mainInfo{
+    width: 100%;
+    padding-bottom: 15px;
+    border-bottom: 1px solid rgba(44, 101, 144, 0.1);
+}
+
+.mainInfo__name{
+    font-size: 20px;
+}
+
+.secondaryInfo{
+    font-size: 16px;
+    flex-grow: 1;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.input{
+    width: 100%;
+    font-size: 14px;
+    color:inherit;
+
+    padding: 5px;
+
+    border: none;
+    border-radius: 2px;
+    outline: none;
+    transition: all 0.2s ease-out 0s;
+}
+
+.input:hover {
+    background-color: rgba(48, 135, 202, 0.075);
+    
+}
+
+.input:focus {
+    background-color: rgba(48, 135, 202, 0.075);
+}
+
+.btn{
+    width: 100%;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    color: #fff;
+    padding: 8px 14px;
+    border-radius: 5px;
+    border: #50b5ff;
+    background-color: #50b5ff;
+    outline: none;
+
+    cursor: pointer;
+    transition: all 0.5s ease-out 0s;  
+}
+
+.btn:hover{
+    background-color: #439eff;
+}
+
+.wrappBtn .btn{
+    width: 70px;
+    float:right;
+}

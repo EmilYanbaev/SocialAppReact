@@ -1,0 +1,122 @@
+/* LOGIN */
+.loginPage {
+    font-family: "Montserrat", sans-serif;
+    height: 100%;
+    width: 450px;
+    margin: auto;
+    /* margin-left: 30px; */
+    padding: 10px;
+  }
+  .container {
+    width: 100%;
+    height: 100%;
+    padding: 50px;
+    background: #fff;
+    border-radius: 5px;
+    box-shadow: 0px 0px 20px 0px rgb(44 101 144 / 10%);
+  }
+  
+  .loginPage__title {
+    font-size: 20px;
+    margin-bottom: 20px;
+  }
+  .loginPage__title p {
+    font-size: 14px;
+  }
+
+
+  /* INPUT*/
+  .inputWrapp{
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .inputWrapp__input{
+    font-family: "Montserrat", sans-serif;
+    font-size: 14px;
+    width: 100%;
+    height: 35px;
+    padding: 10px;
+    border: 1px solid #f1f1f1;
+    border-radius: 10px;
+    outline: none;
+    transition: all 0.2s ease-out 0s;
+  }
+
+  .inputWrapp__input:focus {
+    border-color: #50b5ff;
+  }
+  .inputWrapp__input::placeholder{
+    color: #a09e9e;
+  }
+
+  .inputWrapp__input.warning{
+    border-color: rgb(214, 58, 58);
+  }
+
+
+  /* FORM GROUP */
+   .form_group {
+    font-size: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  label {
+    margin-bottom: 5px;
+    color: #3f414d;
+  }
+ 
+  
+  .error{
+    font-size: 12px;
+    color: rgb(214, 58, 58);
+  }
+  /* CONTROL */
+   .control {
+    width: 100%;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  } 
+  
+  .control__checkBox{
+    margin-right: auto;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+  }
+  
+  .checkBox {
+    width: auto;
+    margin-right: 10px;
+    transform:scale(1.3);
+  }
+
+  .control__checkBox label{
+    margin-bottom: 0px;
+  }
+
+  .btn {
+    font-family: "Montserrat", sans-serif;
+    font-size: 14px;
+    color: #fff;
+    padding: 8px 14px;
+    border-radius: 5px;
+    border: #50b5ff;
+    background-color: #50b5ff;
+    outline: none;
+  
+    cursor: pointer;
+    transition: all 0.5s ease-out 0s;
+  }
+  
+  .btn:hover {
+    background-color: #439eff;
+  }
+  .btn:disabled {
+    background-color: black;
+  }

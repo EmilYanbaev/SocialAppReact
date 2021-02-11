@@ -22,10 +22,29 @@ export const userApi = {
     },
 
     getProfile(userId) {
-            return instance.get(`profile/${userId}`)
+        return instance.get(`profile/${userId}`)
     },
     getAuth() {
-            return instance.get(`auth/me`)
+        return instance.get(`auth/me`)
+    },
+    login({ email, password, rememberMe }) {
+        return instance.post(`auth/login`, { email, password, rememberMe })
+    },
+    logout() {
+        return instance.delete(`auth/login`);
+    },
+    changeMyInfo(data) {
+        let fullData = {
+            fullName: "Emil Yanbaev",
+            ...data
+        }
+        debugger;
+
+        instance.put("/profile",fullData).then(
+            response=>{
+                debugger;
+            }
+        )
     }
 }
 
