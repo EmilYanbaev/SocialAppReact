@@ -5,6 +5,8 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { clearData, followUserThunkCreator, updateInputSearch } from '../../../redux/reducers/friendsReducer';
 import { getUserThunkCreator } from './../../../redux/reducers/friendsReducer';
+import { getUsers } from '../../../redux/selectors/testSelectors';
+import Preloader from '../../otherComponent/Preloader';
 
 class FriendListContainer extends React.Component {
 
@@ -21,27 +23,30 @@ class FriendListContainer extends React.Component {
     componentDidMount() {
         this.props.getUsers();
     }
-    componentWillUnmount(){
+    componentWillUnmount() {
         this.props.clearData();
     }
     render() {
-        return (<>
-            <HeaderPage input={this.props.inputValueSearch}
-                updateInput={this.handlerUpdateInput.bind(this)}
-                getUsers={this.handlerGetUsers.bind(this)} />
-            <FriendList
-                users={this.props.users}
-                disableUsers = {this.props.disableUsers}
-                getUsers={this.handlerGetUsers.bind(this)}
-                follow={this.handlerFollowUser.bind(this)} />
-        </>
-        )
+        if (!this.props.users)
+            return <Preloader />
+        else
+            return (<>
+                <HeaderPage input={this.props.inputValueSearch}
+                    updateInput={this.handlerUpdateInput.bind(this)}
+                    getUsers={this.handlerGetUsers.bind(this)} />
+                <FriendList
+                    users={this.props.users}
+                    disableUsers={this.props.disableUsers}
+                    getUsers={this.handlerGetUsers.bind(this)}
+                    follow={this.handlerFollowUser.bind(this)} />
+            </>
+            )
     }
 }
 
 const mapStateToProps = (state) => {
     return {
-        users: state.friendsPage.users,
+        users: getUsers(state),
         inputValueSearch: state.friendsPage.inputValueSearch,
         currentPage: state.friendsPage.currentPage,
         disableUsers: state.friendsPage.disableUsers
@@ -54,6 +59,6 @@ export default compose(
             updateInput: updateInputSearch,
             getUsers: getUserThunkCreator,
             followUser: followUserThunkCreator,
-            clearData:clearData
+            clearData: clearData
         })
 )(FriendListContainer)

@@ -7,7 +7,7 @@ export const withAuthRedirect = (Component) => {
         render() {
             let path
             if (this.props.isLogin)
-                if (this.props.location.pathname === "/login")
+                if (this.props.location.pathname === "/login" || this.props.location.pathname === "/")
                     path = "/profile"
                 else
                     path = this.props.location.pathname
