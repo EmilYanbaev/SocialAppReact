@@ -1,7 +1,7 @@
 import { stopSubmit } from 'redux-form';
 import { userApi } from './../../serverApi/api';
-const SET_AUTH_DATA = "SET_AUTH_DATA";
-const CLEAR_DATA = "CLEAR_DATA_AUTH"
+const SET_AUTH_DATA = "auth/SET_AUTH_DATA";
+const CLEAR_DATA = "auth/CLEAR_DATA_AUTH"
 
 
 const initialState = {
@@ -31,14 +31,12 @@ export const clearData = () => ({ type: CLEAR_DATA })
 
 
 
-export let authThunk = (dispatch) => {
-    return userApi.getAuth().then(response => {
-        if (response.data.resultCode === 0)
-            dispatch(setAuth(response.data.data, true))
-        else
-            dispatch(setAuth({}, false))
-    })
-    
+export let authThunk = async (dispatch) => {
+    let response = await userApi.getAuth()
+    if (response.data.resultCode === 0)
+        dispatch(setAuth(response.data.data, true))
+    else
+        dispatch(setAuth({}, false))
 }
 
 export let authThunkCreator = () => {
@@ -46,26 +44,19 @@ export let authThunkCreator = () => {
 }
 
 
-export let loginThunkCreator = (data) => dispatch => {
-    userApi.login(data)
-        .then(response => {
-            debugger;
-            if (response.data.resultCode === 0) {
-                authThunk(dispatch)
-            }
-            else dispatch(stopSubmit("login", { _error: response.data.messages }))
-        })
-
+export let loginThunkCreator = (data) => async dispatch => {
+    let response = await userApi.login(data)
+    if (!response.data.resultCode) {
+        authThunk(dispatch)
+    }
+    else dispatch(stopSubmit("login", { _error: response.data.messages }))
 }
 
 export let logOutThunkCreator = () => {
-    return dispatch => {
-        userApi.logout().then(
-            response => {
-                dispatch(clearData())
-                dispatch(authThunk)
-            }
-        )
+    return async dispatch => {
+        await userApi.logout()
+        dispatch(clearData())
+        dispatch(authThunk)
     }
 }
 

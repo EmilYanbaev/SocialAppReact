@@ -1,8 +1,8 @@
 import { userApi } from "../../serverApi/api"
 
-const SET_PROFILE = "SET_PROFILE"
+const SET_PROFILE = "profile/SET_PROFILE"
 // const SET_CURRENT_ID = "SET_CURRENT_ID"
-const CLEAR_DATA_PROFILE = "CLEAR_DATA_PROFILE"
+const CLEAR_DATA_PROFILE = "profile/CLEAR_DATA_PROFILE"
 
 const initialState = {
     profile: {}
@@ -25,21 +25,20 @@ export const setProfile = (profile) => ({ type: SET_PROFILE, profile })
 
 // export const setCurrentId = (id) => ({ type: SET_CURRENT_ID, id })
 
-export const clearData = ()=>({type:CLEAR_DATA_PROFILE})
+export const clearData = () => ({ type: CLEAR_DATA_PROFILE })
 
+//если айдишник пустой, то получаем наш профиль
 export const getProfileThunkCreator = (id) => {
-    return dispatch => {
+    return async dispatch => {
         if (!id) {
-            userApi.getAuth().then(response => {
-                userApi.getProfile(response.data.data.id).then(response => {
-                    dispatch(setProfile(response.data))
-                })
-            })
-        }
-        else userApi.getProfile(id).then(response => {
+            let response = await userApi.getAuth();
+            response = await userApi.getProfile(response.data.data.id)
             dispatch(setProfile(response.data))
         }
-        )
+        else {
+            let response = await userApi.getProfile(id)     
+            dispatch(setProfile(response.data))
+        }
     }
 }
 

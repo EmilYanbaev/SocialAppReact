@@ -10,9 +10,7 @@ let Profile = (props) => {
                     style={props.profile.photos?.large ?
                         { "background-image": `url(${props.profile.photos.large})` } : {}}>
                 </div>
-                <button className={style.btn}>
-                    MESSAGE
-                </button>
+                <button className={style.btn}>MESSAGE</button>
             </div>
 
             <ProfileForm {...props} onSubmit={props.onSubmit} />
@@ -43,7 +41,7 @@ let ProfileForm = (props) => {
             </div>
             <div className={style.secondaryInfo}>
                 <Input name="aboutMe" title="about me:" type="text" />
-                <Input name="lookingForAJob" title="looking for a job" type="checkbox" />
+                <Input name="lookingForAJob" title="looking for a job" type="checkbox" style={{ "width": "auto" }} />
                 <Input name="lookingForAJobDescription" title="looking for a job description" type="text" />
             </div>
             <div className={style.wrappBtn}>
@@ -57,7 +55,7 @@ let Input = (props) => {
     return (
         <div className={style.secondaryInfo__item}>
             <p>{props.title}</p>
-            <Field className={style.input} component={"input"} name={props.name} type={props.type} />
+            <Field className={style.input} component={"input"} name={props.name} type={props.type} style={props.style} />
         </div>
     )
 }

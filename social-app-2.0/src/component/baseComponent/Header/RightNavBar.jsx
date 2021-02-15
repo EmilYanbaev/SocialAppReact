@@ -1,9 +1,9 @@
 import style from "./RightNavBar.module.css"
 
-let RightNavBar= (props)=>{
+let RightNavBar= ({logOut,isLogin})=>{
     return(
         <div className = {style.wrapp}>
-        <button className = {style.btn} onClick = {props.logOut} style = {props.isLogin ?{}:{"display":"none"}}>Sign out</button>
+        <button className = {style.btn} onClick = {logOut} style = {isLogin ?{}:{"display":"none"}}>Sign out</button>
         </div>
     );
 }

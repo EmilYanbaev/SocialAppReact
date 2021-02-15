@@ -1,21 +1,22 @@
-import React from "react"
+import React, { Suspense } from "react"
 import style from "./ContentPage.module.css"
 import { Route } from "react-router-dom";
-import ProfileContainer from "../mainComponent/ProfilePage/ProfileContainer";
-import FriendListContainer from './../mainComponent/FriendPage/FriendPageContainer';
-import LoginContainer from './../mainComponent/LoginPage/LoginContainer';
 import { withAuthRedirect } from './../../hoc/withAuthRedirect';
+import Preloader from "../otherComponent/Preloader";
+const ProfileContainer = React.lazy(() => import("../mainComponent/ProfilePage/ProfileContainer"));
+const FriendListContainer = React.lazy(() => import('./../mainComponent/FriendPage/FriendPageContainer'));
+const LoginContainer = React.lazy(() => import('./../mainComponent/LoginPage/LoginContainer'));
 
-class ContentPage extends React.Component {
-    render() {
-        return (
-            <div className={style.wrapp_content}>
+const ContentPage = () => {
+    return (
+        <div className={style.wrapp_content}>
+            <React.Suspense fallback={Preloader}>
                 <Route path="/profile/:id?" component={ProfileContainer} />
                 <Route path="/friend" component={FriendListContainer} />
                 <Route path="/login" component={LoginContainer} />
-            </div>
-        )
-    }
+            </React.Suspense>
+        </div>
+    )
 }
 
 

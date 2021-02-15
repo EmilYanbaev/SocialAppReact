@@ -2,8 +2,39 @@ import { Field, reduxForm } from "redux-form";
 import style from "./Login.module.css"
 import { maxLengthCreator, required } from './../../../../utils/validators/validators';
 
+const maxLength = maxLengthCreator(30);
 
-const Input = ({ input, meta, ...props }) => {
+let LoginForm = ({handleSubmit,error}) => {
+    return (
+        <form className={style.form_group} onSubmit={handleSubmit}>
+
+            {CreateField("inputEmail", "email", Input, "text", [required, maxLength], "Email enter", "Email address",)}
+            {CreateField("inputPass", "password", Input, "password", [required], "Password", "Password",)}
+            
+            <p className={style.error} >{error}</p>
+            <div className={style.control}>
+                <div className={style.control__checkBox}>
+                    {CreateField("checkbox", "rememberMe", "input", "checkbox", [], "", "Remember Me", {className:style.checkBox})}
+                </div>
+                <button type="submit" className={style.btn}>Sign In</button>
+            </div>
+        </form>
+    )
+}
+
+LoginForm = reduxForm({ form: "login" })(LoginForm)
+export default LoginForm
+
+const CreateField = (id, name, component, type, validators, placeholder, text, props) => {
+    return (
+        <>
+            <label htmlFor={id}>{text}</label>
+            <Field id={id} name={name} component={component} type={type} validate={validators} placeholder={placeholder} {...props}/>
+        </>
+    )
+}
+
+const Input = ({ input, meta,...props }) => {
     const hasError = meta.touched && meta.error
     return (
         <div className={style.inputWrapp}>
@@ -13,47 +44,4 @@ const Input = ({ input, meta, ...props }) => {
     )
 }
 
-const maxLength = maxLengthCreator(30);
 
-let LoginForm = (props) => {
-    return (
-        <form className={style.form_group} onSubmit={props.handleSubmit}>
-            <label htmlFor="inputEmail">Email address</label>
-            <Field
-                component={Input}
-                name={"email"}
-                type="text"
-                id="inputEmail"
-                placeholder="Email enter"
-                validate={[required, maxLength]}
-            />
-
-            <label htmlFor="inputPass">Password</label>
-            <Field
-                component={Input}
-                name={"password"}
-                type="password"
-                id="inputPass"
-                placeholder="Password"
-                validate={[required]}
-            />
-
-            <p className={style.error} >{props.error}</p>
-            <div className={style.control}>
-                <div className={style.control__checkBox}>
-                    <Field
-                        component={"input"}
-                        name={"rememberMe"}
-                        type="checkbox"
-                        id="checkBox"
-                        className={style.checkBox} />
-                    <label htmlFor="checkBox">Remember Me</label>
-                </div>
-
-                <button type="submit" className={style.btn}>Sign In</button>
-            </div>
-        </form>
-    )
-}
-LoginForm = reduxForm({ form: "login" })(LoginForm)
-export default LoginForm

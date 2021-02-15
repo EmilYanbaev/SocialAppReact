@@ -3,11 +3,11 @@ import LeftNavBar from "./LeftNavBar"
 import RightNavBar from "./RightNavBar"
 
 
-let Header = (props) => {
+let Header = ({logOut,isLogin}) => {
     return (
         <header className={style.header} >
             <LeftNavBar />
-            <RightNavBar isLogin = {props.isLogin} logOut = {props.logOut}  />
+            <RightNavBar isLogin = {isLogin} logOut = {logOut}  />
         </header>
     );
 }

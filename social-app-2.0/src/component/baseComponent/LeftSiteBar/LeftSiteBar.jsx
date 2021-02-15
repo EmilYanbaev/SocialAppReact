@@ -9,8 +9,8 @@ class LeftSiteBar extends React.Component {
     state = {
         items: [
             { id: '1', link: "/profile", icon: 'icon', text: 'Profile' },
-            { id: '2', link: "/dialogs", icon: 'icon', text: 'Dialogs' },
-            { id: '3', link: "/friend", icon: 'icon', text: 'FriendList' },
+            { id: '2', link: "/friend", icon: 'icon', text: 'FriendList' },
+            { id: '3', link: "/dialogs", icon: 'icon', text: 'Dialogs' },
             { id: '4', link: "/newsfeed", icon: 'icon', text: 'Newsfeed' },
         ],
     }

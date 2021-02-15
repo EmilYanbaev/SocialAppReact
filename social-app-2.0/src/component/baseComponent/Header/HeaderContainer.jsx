@@ -6,7 +6,6 @@ import { logOutThunkCreator } from './../../../redux/reducers/authReducer';
 
 class HeaderContainer extends React.Component{
     handleLogOut(){
-        debugger;
         this.props.logOut();
     }
     render(){
