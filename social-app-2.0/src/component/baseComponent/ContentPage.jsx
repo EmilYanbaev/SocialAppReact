@@ -10,11 +10,11 @@ const LoginContainer = React.lazy(() => import('./../mainComponent/LoginPage/Log
 const ContentPage = () => {
     return (
         <div className={style.wrapp_content}>
-            <React.Suspense fallback={Preloader}>
+            <Suspense fallback={<Preloader/>}>
                 <Route path="/profile/:id?" component={ProfileContainer} />
                 <Route path="/friend" component={FriendListContainer} />
                 <Route path="/login" component={LoginContainer} />
-            </React.Suspense>
+            </Suspense>
         </div>
     )
 }

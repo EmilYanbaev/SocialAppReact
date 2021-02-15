@@ -11,7 +11,7 @@ function App() {
   return (
     <div className="App" >
       <Provider store={store}>
-        <BrowserRouter>
+        <BrowserRouter basename={process.env.PUBLIC_URL}>
           <GeneralContainer />
         </BrowserRouter>
       </Provider>
