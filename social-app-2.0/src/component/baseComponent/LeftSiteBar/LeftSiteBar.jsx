@@ -17,8 +17,7 @@ class LeftSiteBar extends React.Component {
 
     render() {
         let itemsJSX = this.state.items.map(item => <ItemLink item={item} disable={!this.props.isLogin} key={item.id} />)
-    
-        return (<div className={style.sitebar}>
+        return (<div className={style.sitebar} style = {this.props.isView?{"display":"flex"}:{}}>
             {itemsJSX}
         </div>)
     }
@@ -29,7 +28,8 @@ class LeftSiteBar extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        isLogin: state.auth.isLogin
+        isLogin: state.auth.isLogin,
+        isView:state.viewModule.isView.leftSiteBar
     }
 }
 

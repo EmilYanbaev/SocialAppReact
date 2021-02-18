@@ -10,10 +10,13 @@ export const withAuthRedirect = (Component) => {
                 if (this.props.location.pathname === "/login" || this.props.location.pathname === "/")
                     path = "/profile"
                 else
-                    path = this.props.location.pathname
-            else path = "/login"
+                    path = this.props.location.pathname;
+            else path = "/login";
+            
+            let {isLogin,...passThroughProps} = this.props
+
             return (<>
-                <Component {...this.props} />
+                <Component {...passThroughProps} /> 
                 <Redirect to={path} />
             </>)
         }

@@ -1,4 +1,5 @@
 import { authThunk } from './authReducer';
+import { setClientSizeThunk } from './viewReducer';
 const INITIALIZED_SUCCESS ="general/INITIALIZED_SUCCESS"
 
 
@@ -22,6 +23,8 @@ export const initializedSuccess = ()=>({type:INITIALIZED_SUCCESS})
 export const initialize = ()=> async (dispatch)=>{
     
     await dispatch(authThunk)
+    // dispatch(setClientSizeThunk)
+
     
     //ВОЗМОЖНО ЭТО КРАЙНЕ НЕПРАВИЛЬНО, НО СДЕЛАЛ ЭТО ДЛЯ ТОГО, ЧТОБЫ НЕ БЫЛО
     //МИЛЛИСЕКУНДНОГО МОРГАНИЯ МЕЖДУ ПРЕЛОАДЕРОМ И СТРАНИЦЕЙ

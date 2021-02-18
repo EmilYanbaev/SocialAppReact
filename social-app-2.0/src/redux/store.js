@@ -5,6 +5,7 @@ import friendsReducer from "./reducers/friendsReducer";
 import profileReducer from "./reducers/profileReducer";
 import { reducer as formReducer } from 'redux-form'
 import generalReducer from './reducers/generalReducer';
+import viewReducer from './reducers/viewReducer';
 
 const reducers = combineReducers(
     {
@@ -12,6 +13,7 @@ const reducers = combineReducers(
         auth: authReducer,
         profilePage: profileReducer,
         friendsPage: friendsReducer,
+        viewModule:viewReducer,
         form: formReducer
     }
 )

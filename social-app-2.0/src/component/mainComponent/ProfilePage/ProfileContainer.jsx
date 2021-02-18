@@ -7,6 +7,7 @@ import { getProfileThunkCreator, clearData } from './../../../redux/reducers/pro
 import { userApi } from './../../../serverApi/api';
 import Preloader from './../../otherComponent/Preloader';
 import { getProfile } from '../../../redux/selectors/testSelectors';
+import { withHiddenSiteBar } from './../../../hoc/withHiddenSitebar';
 
 let ProfileContainer = (props) => {
 
@@ -37,6 +38,7 @@ const mapStateToProps = (state) => {
 
 
 export default compose(
+    withHiddenSiteBar,
     withRouter,
     connect(mapStateToProps, { getProfile: getProfileThunkCreator, clearData: clearData })
 )(ProfileContainer)

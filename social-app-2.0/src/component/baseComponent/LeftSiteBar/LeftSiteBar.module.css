@@ -13,16 +13,11 @@
     justify-content: flex-start;
     align-items:stretch;
     
+    transition: all 0.45s ease 0s;
 }
 
-@media (max-width: 1300px) {
+ @media (max-width: 1300px) {
     .sitebar {
         display: none;
     }
-}
-
-@media (max-width: 1500px) {
-    .sitebar {
-        min-width: 100px;
-    }
-}
+} 

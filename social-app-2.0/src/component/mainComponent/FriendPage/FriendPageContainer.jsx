@@ -7,8 +7,16 @@ import { clearData, followUserThunkCreator, updateInputSearch } from '../../../r
 import { getUserThunkCreator } from './../../../redux/reducers/friendsReducer';
 import { getUsers } from '../../../redux/selectors/testSelectors';
 import Preloader from '../../otherComponent/Preloader';
+import { withHiddenSiteBar } from './../../../hoc/withHiddenSitebar';
 
 class FriendListContainer extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.handlerUpdateInput = this.handlerUpdateInput.bind(this);
+        this.handlerGetUsers = this.handlerGetUsers.bind(this);
+        this.handlerFollowUser = this.handlerFollowUser.bind(this);
+    }
 
     handlerUpdateInput(value) {
         this.props.updateInput(value);
@@ -22,6 +30,7 @@ class FriendListContainer extends React.Component {
     }
     componentDidMount() {
         this.props.getUsers();
+        // throw "I LOL" проверка хока предохранителя)
     }
     componentWillUnmount() {
         this.props.clearData();
@@ -32,13 +41,13 @@ class FriendListContainer extends React.Component {
         else
             return (<>
                 <HeaderPage input={this.props.inputValueSearch}
-                    updateInput={this.handlerUpdateInput.bind(this)}
-                    getUsers={this.handlerGetUsers.bind(this)} />
+                    updateInput={this.handlerUpdateInput}
+                    getUsers={this.handlerGetUsers} />
                 <FriendList
                     users={this.props.users}
                     disableUsers={this.props.disableUsers}
-                    getUsers={this.handlerGetUsers.bind(this)}
-                    follow={this.handlerFollowUser.bind(this)} />
+                    getUsers={this.handlerGetUsers}
+                    follow={this.handlerFollowUser} />
             </>
             )
     }
@@ -54,6 +63,7 @@ const mapStateToProps = (state) => {
 }
 
 export default compose(
+    withHiddenSiteBar,
     connect(mapStateToProps,
         {
             updateInput: updateInputSearch,

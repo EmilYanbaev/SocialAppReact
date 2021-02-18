@@ -1,4 +1,4 @@
-import React , {useEffect} from "react"
+import React, { useEffect } from "react"
 import LeftSiteBar from './baseComponent/LeftSiteBar/LeftSiteBar'
 import ContentPage from "./baseComponent/ContentPage"
 import RightSiteBar from './baseComponent/RightSiteBar/RightSiteBar'
@@ -7,9 +7,10 @@ import { compose } from 'redux';
 import HeaderContainer from './baseComponent/Header/HeaderContainer';
 import { initialize } from './../redux/reducers/generalReducer';
 import Preloader from './otherComponent/Preloader';
+import { withErrorBoundary } from './../hoc/withErrorBoundary';
 
 
-const GeneralContainer = ({initialized,initialize}) => {
+const GeneralContainer = ({ initialized, initialize }) => {
     useEffect(() => {
         initialize();
     }, [])
@@ -36,8 +37,9 @@ const mapStateToProps = (state) => {
         initialized: state.general.initialized,
     }
 }
-export default compose(
-    connect(mapStateToProps, { initialize: initialize }))(GeneralContainer)
+export default compose(withErrorBoundary,
+    connect(mapStateToProps, { initialize: initialize }))
+    (GeneralContainer)
 
 
 // class GeneralContainer extends React.Component {

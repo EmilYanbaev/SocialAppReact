@@ -28,9 +28,3 @@
     font-size: 10px;
     margin-right: 10px;
 }
-
-@media (max-width: 1500px) {
-    .text {
-        display: none;
-    }
-}

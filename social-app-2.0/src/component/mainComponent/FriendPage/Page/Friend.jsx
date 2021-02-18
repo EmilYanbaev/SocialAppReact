@@ -4,7 +4,7 @@ import style from "./Friend.module.css"
 
 let Friend = (props) => {
     let onFollowing = () => {
-        props.follow(props.user.id,props.user.followed)
+        props.follow(props.user.id, props.user.followed)
     }
     const userStyle = {};
     if (props.user.photos.small)
@@ -27,9 +27,7 @@ let Friend = (props) => {
                         <h6>@designer{/*props.work*/}</h6>
 
                         <p> {props.user.status == null ? "Lorem Ipsum is simply dummy text of the" : props.user.status}</p>
-
                     </div>
-
                 </div>
                 <button className={style.btn} onClick={onFollowing} disabled={props.disable}>
                     {!props.user.followed ? "Following" : "unFollowing"}
@@ -40,3 +38,14 @@ let Friend = (props) => {
 }
 
 export default Friend
+
+
+//    
+
+//    
+
+   //    
+
+ //   
+
+//

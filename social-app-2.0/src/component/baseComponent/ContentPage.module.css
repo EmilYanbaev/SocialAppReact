@@ -1,12 +1,13 @@
 .wrapp_content{
     height: 100%;
+    width: 100%;
     margin: 0 250px;
     flex-grow: 1;
 }
 
 @media (min-width:1300px) and (max-width: 1500px) {
     .wrapp_content {
-        margin: 0 100px ;
+        margin: 0 100px 0 250px;
     }
 }
 
