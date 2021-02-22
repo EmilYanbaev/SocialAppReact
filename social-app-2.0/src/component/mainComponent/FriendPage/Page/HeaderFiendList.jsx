@@ -11,18 +11,18 @@ class HeaderPage extends React.Component {
     }
 
     componentDidMount() {
-        // this.inputSearch.current.focus();
+        this.inputSearch.current.focus();
     }
     // componentDidUpdate() {
     //     this.inputSearch.current.focus();
     // }
 
     onChange(event) {
-        debugger;
+
         this.props.updateInput(event.target.value)
     }
     onClickGetUser(event) {
-        debugger;
+        
         event.preventDefault();
         this.props.getUsers(false);
     }

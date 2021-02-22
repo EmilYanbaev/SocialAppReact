@@ -1,19 +1,22 @@
-import React, { useEffect } from 'react';
-import { Field, reduxForm } from "redux-form"
 import style from "./Profile.module.css"
+import InfoBlock from "./Block/InfoBlock";
+import MainBlock from './Block/MainBlock';
+import ModalBlock from './Block/ModalBlock';
+
+
+
 
 let Profile = (props) => {
+
     return (
         <div className={style.container}>
-            <div className={style.user}>
-                <div className={style.user__photo}
-                    style={props.profile.photos?.large ?
-                        { "background-image": `url(${props.profile.photos.large})` } : {}}>
-                </div>
-                <button className={style.btn}>MESSAGE</button>
-            </div>
 
-            <ProfileForm {...props} onSubmit={props.onSubmit} />
+            <MainBlock isOwner = {props.isOwner} photos={props.profile.photos} savePhoto={props.savePhoto} openModal={() => { props.toggleModal(true) }} />
+
+            <InfoBlock profile={props.profile} />
+
+            <ModalBlock profile={props.profile} closeModal={() => { props.toggleModal(false) }} view={props.viewModal} onSubmit = {props.onSubmit} />
+            
         </div>
     )
 }
@@ -22,45 +25,13 @@ export default Profile
 
 
 
-let ProfileForm = (props) => {
 
-    useEffect(() => {
-        props.initialize({
-            aboutMe: props.profile.aboutMe,
-            lookingForAJob: props.profile.lookingForAJob,
-            lookingForAJobDescription: props.profile.lookingForAJobDescription
-        });
-    }, [props.profile])
 
-    return (
-        <form className={style.userInfo} onSubmit={props.handleSubmit}>
-            <div className={style.mainInfo}>
-                <div className={style.mainInfo__name}>
-                    {props.profile.fullName}
-                </div>
-            </div>
-            <div className={style.secondaryInfo}>
-                <Input name="aboutMe" title="about me:" type="text" />
-                <Input name="lookingForAJob" title="looking for a job" type="checkbox" style={{ "width": "auto" }} />
-                <Input name="lookingForAJobDescription" title="looking for a job description" type="text" />
-            </div>
-            <div className={style.wrappBtn}>
-                <button type="submit" className={style.btn}>Save</button>
-            </div>
-        </form>
-    )
-}
 
-let Input = (props) => {
-    return (
-        <div className={style.secondaryInfo__item}>
-            <p>{props.title}</p>
-            <Field className={style.input} component={"input"} name={props.name} type={props.type} style={props.style} />
-        </div>
-    )
-}
 
-ProfileForm = reduxForm({ form: 'userInfo' })(ProfileForm)
+
+
+
 
 
 

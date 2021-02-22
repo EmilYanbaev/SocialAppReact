@@ -1,15 +1,15 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from "react-redux";
 import { withRouter } from 'react-router-dom';
 import { compose } from 'redux';
 import Profile from "./Page/Profile"
-import { getProfileThunkCreator, clearData } from './../../../redux/reducers/profileReducer';
-import { userApi } from './../../../serverApi/api';
-import Preloader from './../../otherComponent/Preloader';
-import { getProfile } from '../../../redux/selectors/testSelectors';
+import { getProfile, clearData, savePhoto, saveProfileInfo } from './../../../redux/reducers/profileReducer';
+import { getProfileSelector } from '../../../redux/selectors/testSelectors';
 import { withHiddenSiteBar } from './../../../hoc/withHiddenSitebar';
+import { GroupComponent } from './../../otherComponent/GroupComponent';
 
 let ProfileContainer = (props) => {
+    const [viewModal, toggleModal] = useState(false)
 
     useEffect(() => {
         props.getProfile(props.match.params.id)
@@ -17,22 +17,31 @@ let ProfileContainer = (props) => {
     }, [props.match.params.id])
 
     let handleSubmit = (data) => {
-        userApi.changeMyInfo(data)
+        props.saveProfileInfo(data)
+    }
+
+    let handleSavePhoto = (file) => {
+        props.savePhoto(file);
     }
 
     if (!props.profile)
-        return <Preloader />
+        return <GroupComponent.Preloader />
     else
         return (
             <Profile
+                isOwner={!props.match.params.id}
                 profile={props.profile}
-                onSubmit={handleSubmit.bind(this)} />)
+                viewModal = {viewModal}
+                toggleModal = {toggleModal.bind(this)}
+                savePhoto={handleSavePhoto.bind(this)}
+                onSubmit={handleSubmit.bind(this)}
+            />)
 }
 
 
 const mapStateToProps = (state) => {
     return {
-        profile: getProfile(state)
+        profile: getProfileSelector(state)
     }
 }
 
@@ -40,36 +49,6 @@ const mapStateToProps = (state) => {
 export default compose(
     withHiddenSiteBar,
     withRouter,
-    connect(mapStateToProps, { getProfile: getProfileThunkCreator, clearData: clearData })
+    connect(mapStateToProps, { getProfile, savePhoto, saveProfileInfo, clearData})
 )(ProfileContainer)
-
-
-// class ProfileContainer extends React.Component {
-//     componentDidMount() {
-//         this.props.getProfile(this.props.match.params.id)
-//     }
-
-//     componentDidUpdate(prevProps, prevState) {
-//         if (prevProps.match.params.id !== this.props.match.params.id)
-//             this.props.getProfile()
-//     }
-
-//     componentWillUnmount() {
-//         this.props.clearData();
-//     }
-
-//     handleSubmit(data) {
-//         userApi.changeMyInfo(data)
-//     }
-//     render() {
-//         if (!this.props.profile)
-//             return <Preloader />
-//         else
-//             return (
-//                 <Profile
-//                     key={this.props.match.params.id ? this.props.match.params.id : "1"}
-//                     profile={this.props.profile}
-//                     onSubmit={this.handleSubmit.bind(this)} />)
-//     }
-// }
 

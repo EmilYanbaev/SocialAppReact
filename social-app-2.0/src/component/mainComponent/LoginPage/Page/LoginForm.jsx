@@ -1,6 +1,7 @@
 import { Field, reduxForm } from "redux-form";
 import style from "./Login.module.css"
 import { maxLengthCreator, required } from './../../../../utils/validators/validators';
+import { GroupComponent } from './../../../otherComponent/GroupComponent';
 
 const maxLength = maxLengthCreator(30);
 
@@ -16,7 +17,7 @@ let LoginForm = ({handleSubmit,error}) => {
                 <div className={style.control__checkBox}>
                     {CreateField("checkbox", "rememberMe", "input", "checkbox", [], "", "Remember Me", {className:style.checkBox})}
                 </div>
-                <button type="submit" className={style.btn}>Sign In</button>
+                <GroupComponent.Button  type="submit">Sign In</GroupComponent.Button>
             </div>
         </form>
     )

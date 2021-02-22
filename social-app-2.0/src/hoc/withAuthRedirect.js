@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Redirect, withRouter } from 'react-router-dom';
+import { getDisplayName } from './../utils/other';
 
 export const withAuthRedirect = (Component) => {
     class AuthContainer extends React.Component {
@@ -12,15 +13,17 @@ export const withAuthRedirect = (Component) => {
                 else
                     path = this.props.location.pathname;
             else path = "/login";
-            
-            let {isLogin,...passThroughProps} = this.props
+
+            let { isLogin, ...passThroughProps } = this.props
 
             return (<>
-                <Component {...passThroughProps} /> 
+                <Component {...passThroughProps} />
                 <Redirect to={path} />
             </>)
         }
     }
+
+    AuthContainer.displayName = `withAuthRedirect(${getDisplayName(Component)})`
 
     const mapStateToProps = (state) => {
         return {
@@ -29,3 +32,5 @@ export const withAuthRedirect = (Component) => {
     }
     return withRouter(connect(mapStateToProps)(AuthContainer))
 }
+
+

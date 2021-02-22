@@ -5,7 +5,7 @@ import { createSelector } from "reselect"
 
 let getProfileSimpleSelector = (state) => (state.profilePage.profile)
 
-export const getProfile = createSelector(getProfileSimpleSelector, (profile) => {
+export const getProfileSelector = createSelector(getProfileSimpleSelector, (profile) => {
 
     for (let key in profile) {
         return profile;

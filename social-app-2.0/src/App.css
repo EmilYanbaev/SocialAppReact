@@ -48,3 +48,8 @@ h1, h2, h3, h4, h5, h6 {
     flex-direction: row;
     margin-top: 75px;
 }
+
+#modal-root {
+    position: relative;
+    z-index: 999;
+}  

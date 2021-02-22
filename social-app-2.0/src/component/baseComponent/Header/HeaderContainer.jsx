@@ -20,7 +20,6 @@ class HeaderContainer extends React.Component {
         this.props.onMenu();
     }
     render() {
-        console.log(this.props.isLogin)
         return (
             <Header>
                 <LeftNavBar onMenu = {this.handleMenu}/>

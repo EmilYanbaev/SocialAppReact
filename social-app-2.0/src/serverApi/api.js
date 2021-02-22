@@ -33,18 +33,22 @@ export const userApi = {
     logout() {
         return instance.delete(`auth/login`);
     },
-    changeMyInfo(data) {
+    setMyPhoto(file) {
+        let formData = new FormData()
+        formData.append("image", file)
+        return instance.put("/profile/photo", formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        })
+    },
+    changeMyInfo({ vk, github, ...data }) {
         let fullData = {
-            fullName: "Emil Yanbaev",
-            ...data
+            ...data,
+            contacts: { vk, github }
         }
         debugger;
-
-        instance.put("/profile",fullData).then(
-            response=>{
-                debugger;
-            }
-        )
+        return instance.put("/profile", fullData)
     }
 }
 

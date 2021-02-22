@@ -1,0 +1,86 @@
+/* USER */
+.user{
+    flex-basis: 30%;
+    /* max-height: 340px; */
+    flex-shrink: 0;
+    margin-right: 15px;
+    padding: 20px;
+    border-radius: 5px;
+    background-color: white;
+    box-shadow: 0px 0px 20px 0px rgba(44, 101, 144, 0.1);
+}
+.user__photo{
+    min-height: 250px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    background-image: url("../../assets/avatar.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+/* CHANGEPANEL */
+ .changePanel{
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.changePanel__item{
+    margin-bottom: 8px;
+}
+
+/* CHANGE_PHOTO */
+.change_photo__label{
+    display: inline-block;
+    cursor: pointer;
+    transition: all 0.5s ease-out 0s;  
+}
+
+.change_photo__label:hover{
+    color:#50b5ff;
+}
+
+.change_photo__input{
+    display:none;
+}
+
+/* CHANGE_INFO */
+
+.change_info__btn{
+    font-family: inherit;
+    font-size: inherit;
+    color: inherit;
+    text-align: left;
+
+    border:none;
+    background: none;
+    outline: none;
+    cursor: pointer;
+    transition: all 0.5s ease-out 0s;  
+}
+
+.change_info__btn:hover{
+    color:#50b5ff;
+}
+
+
+
+/* MEDIA COPY */
+
+@media (min-width:426px) and (max-width:768px){
+   .user{
+        min-width: 50%;
+        align-self: center;
+        margin-bottom: 15px;
+    }
+}
+
+@media (max-width:425px){
+    .user{
+        width: 100%;
+        margin-right: 0px;
+        margin-bottom: 15px;
+    }
+}

@@ -6,8 +6,8 @@ import { connect } from 'react-redux';
 import { clearData, followUserThunkCreator, updateInputSearch } from '../../../redux/reducers/friendsReducer';
 import { getUserThunkCreator } from './../../../redux/reducers/friendsReducer';
 import { getUsers } from '../../../redux/selectors/testSelectors';
-import Preloader from '../../otherComponent/Preloader';
 import { withHiddenSiteBar } from './../../../hoc/withHiddenSitebar';
+import { GroupComponent } from './../../otherComponent/GroupComponent';
 
 class FriendListContainer extends React.Component {
 
@@ -37,7 +37,7 @@ class FriendListContainer extends React.Component {
     }
     render() {
         if (!this.props.users)
-            return <Preloader />
+            return <GroupComponent.Preloader />
         else
             return (<>
                 <HeaderPage input={this.props.inputValueSearch}
