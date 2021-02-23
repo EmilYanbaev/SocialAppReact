@@ -1,4 +1,5 @@
 import { userApi } from "../../serverApi/api"
+import { stopSubmit } from 'redux-form';
 
 const SET_PROFILE = "profile/SET_PROFILE"
 
@@ -66,9 +67,11 @@ export const savePhoto = (file) => {
 export const saveProfileInfo = (data) => {
     return async (dispatch) => {
         let response = await userApi.changeMyInfo(data);
-        debugger;
-        if (!response.data.resultCode)
-            dispatch(saveProfileInfoSuccess(data))
+        dispatch(getProfile());
+
+        // if (response.data.resultCode)
+        //     dispatch(stopSubmit("userInfo", { _error: response.data.messages }))
+        // else dispatch(saveProfileInfoSuccess(data))
     }
 }
 

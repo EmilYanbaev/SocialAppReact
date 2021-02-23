@@ -10,13 +10,13 @@ class LoginContainer extends React.Component {
     }
 
     render() {
-        return <Login signIn={this.handleSignIn.bind(this)} incorrectData = {this.props.incorrectData}  />
+        return <Login signIn={this.handleSignIn.bind(this)} captchaUrl={this.props.captchaUrl} />
     }
 }
 
-let mapStateToProps = (state)=>{
+let mapStateToProps = (state) => {
     return {
-        incorrectData:state.auth.incorrectData
+        captchaUrl: state.auth.captchaUrl
     }
 }
 

@@ -10,28 +10,9 @@ const instance = axios.create(
 )
 
 export const userApi = {
-    getUsers(currentPage, pageSize, textSearch) {
-        return instance.get(`users?page=${currentPage}&count=${pageSize}&term=${textSearch}`).then(response => response.data)
-    },
-
-    follow(id, followed) {
-        if (!followed)
-            return instance.post(`follow/${id}`).then(response => response.data)
-        else
-            return instance.delete(`follow/${id}`).then(response => response.data)
-    },
 
     getProfile(userId) {
         return instance.get(`profile/${userId}`)
-    },
-    getAuth() {
-        return instance.get(`auth/me`)
-    },
-    login({ email, password, rememberMe }) {
-        return instance.post(`auth/login`, { email, password, rememberMe })
-    },
-    logout() {
-        return instance.delete(`auth/login`);
     },
     setMyPhoto(file) {
         let formData = new FormData()
@@ -42,14 +23,33 @@ export const userApi = {
             }
         })
     },
-    changeMyInfo({ vk, github, ...data }) {
-        let fullData = {
-            ...data,
-            contacts: { vk, github }
-        }
-        debugger;
-        return instance.put("/profile", fullData)
-    }
+    changeMyInfo(data) {
+        return instance.put("/profile", data)
+    },
+
+    getUsers(currentPage, pageSize, textSearch) {
+        return instance.get(`users?page=${currentPage}&count=${pageSize}&term=${textSearch}`).then(response => response.data)
+    },
+    follow(id, followed) {
+        if (!followed)
+            return instance.post(`follow/${id}`).then(response => response.data)
+        else
+            return instance.delete(`follow/${id}`).then(response => response.data)
+    },
+
+    getAuth() {
+        return instance.get(`auth/me`)
+    },
+    login({ email, password, rememberMe, captcha }) {
+        return instance.post(`auth/login`, { email, password, rememberMe, captcha })
+    },
+    getCaptcha() {
+        return instance.get(`security/get-captcha-url`);
+    },
+    logout() {
+        return instance.delete(`auth/login`);
+    },
+
 }
 
 

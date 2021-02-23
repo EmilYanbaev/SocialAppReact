@@ -5,19 +5,28 @@ import { GroupComponent } from './../../../otherComponent/GroupComponent';
 
 const maxLength = maxLengthCreator(30);
 
-let LoginForm = ({handleSubmit,error}) => {
+let LoginForm = ({ handleSubmit, captchaUrl, error }) => {
+    debugger;
     return (
         <form className={style.form_group} onSubmit={handleSubmit}>
 
             {CreateField("inputEmail", "email", Input, "text", [required, maxLength], "Email enter", "Email address",)}
             {CreateField("inputPass", "password", Input, "password", [required], "Password", "Password",)}
-            
-            <p className={style.error} >{error}</p>
+
+            { error && <p className={style.error} >{error}</p>}
+            {captchaUrl &&
+                <div className={style.captchaControl}>
+                    <img src={captchaUrl} />
+                    {CreateField("captcha", "captcha", Input, "text", [required], "", "Captcha",)}
+                </div>
+            }
+
             <div className={style.control}>
                 <div className={style.control__checkBox}>
-                    {CreateField("checkbox", "rememberMe", "input", "checkbox", [], "", "Remember Me", {className:style.checkBox})}
+                    {CreateField("checkbox", "rememberMe", "input", "checkbox", [], "", "Remember Me", { className: style.checkBox })}
                 </div>
-                <GroupComponent.Button  type="submit">Sign In</GroupComponent.Button>
+
+                <GroupComponent.Button type="submit">Sign In</GroupComponent.Button>
             </div>
         </form>
     )
@@ -30,17 +39,17 @@ const CreateField = (id, name, component, type, validators, placeholder, text, p
     return (
         <>
             <label htmlFor={id}>{text}</label>
-            <Field id={id} name={name} component={component} type={type} validate={validators} placeholder={placeholder} {...props}/>
+            <Field id={id} name={name} component={component} type={type} validate={validators} placeholder={placeholder} {...props} />
         </>
     )
 }
 
-const Input = ({ input, meta,...props }) => {
+const Input = ({ input, meta, ...props }) => {
     const hasError = meta.touched && meta.error
     return (
         <div className={style.inputWrapp}>
             <input className={style.inputWrapp__input + " " + (hasError ? style.warning : "")} {...input} {...props} />
-            <p className={style.error} style={hasError ? { "display": "block" } : { "display": "none" }} >{meta.error}</p>
+            {hasError && <p className={style.error}>{meta.error}</p>}
         </div>
     )
 }

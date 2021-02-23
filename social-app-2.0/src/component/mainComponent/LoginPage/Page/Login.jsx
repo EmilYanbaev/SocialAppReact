@@ -1,7 +1,7 @@
 import style from "./Login.module.css"
 import LoginForm from './LoginForm';
 
-let Login = ({ signIn, incorrectData }) => {
+let Login = ({ signIn,captchaUrl}) => {
     return (
         <div className={style.loginPage}>
             <div className={style.container}>
@@ -10,7 +10,7 @@ let Login = ({ signIn, incorrectData }) => {
                     <p>Enter your email address and password to access user panel.</p>
                 </div>
 
-                <LoginForm onSubmit={signIn} incorrectData={incorrectData} />
+                <LoginForm onSubmit={signIn} captchaUrl={captchaUrl} />
             </div>
         </div>
     )

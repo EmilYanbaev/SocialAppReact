@@ -10,9 +10,9 @@ function App() {
     <div className="App" >
       <Provider store={store}>
         <HashRouter >
-        {/* <BrowserRouter> */}
+          {/* <BrowserRouter> */}
           <GeneralContainer />
-        {/* </BrowserRouter> */}
+          {/* </BrowserRouter> */}
         </HashRouter>
       </Provider>
     </div>
