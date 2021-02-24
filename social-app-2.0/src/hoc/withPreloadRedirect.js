@@ -1,14 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Redirect, withRouter } from 'react-router-dom';
-import { getDisplayName } from './../utils/other';
+import { getDisplayName } from '../utils/other';
 
-export const withAuthRedirect = (Component) => {
-    class AuthContainer extends React.Component {
+export const withPreloadRedirect = (Component) => {
+    class PreloadRedirectContainer extends React.Component {
         render() {
             let path
             if (this.props.isLogin)
-                if (this.props.location.pathname === "/login" || this.props.location.pathname === "/")
+                if (this.props.location.pathname === "/login" || this.props.location.pathname === "/" || this.props.location.pathname === "/SocialAppReact")
                     path = "/profile"
                 else
                     path = this.props.location.pathname;
@@ -23,14 +23,14 @@ export const withAuthRedirect = (Component) => {
         }
     }
 
-    AuthContainer.displayName = `withAuthRedirect(${getDisplayName(Component)})`
+    PreloadRedirectContainer.displayName = `withPreloadRedirect(${getDisplayName(Component)})`
 
     const mapStateToProps = (state) => {
         return {
             isLogin: state.auth.isLogin
         }
     }
-    return withRouter(connect(mapStateToProps)(AuthContainer))
+    return withRouter(connect(mapStateToProps)(PreloadRedirectContainer))
 }
 
 

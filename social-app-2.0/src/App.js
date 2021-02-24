@@ -9,11 +9,11 @@ function App() {
   return (
     <div className="App" >
       <Provider store={store}>
-        <HashRouter >
-          {/* <BrowserRouter> */}
+        {/* <HashRouter > */}
+        <BrowserRouter>
           <GeneralContainer />
-          {/* </BrowserRouter> */}
-        </HashRouter>
+        </BrowserRouter>
+        {/* </HashRouter> */}
       </Provider>
     </div>
   );

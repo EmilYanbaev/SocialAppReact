@@ -1,7 +1,7 @@
 import React, { Suspense } from "react"
 import style from "./ContentPage.module.css"
-import { Redirect, Route, Switch } from "react-router-dom";
-import { withAuthRedirect } from './../../hoc/withAuthRedirect';
+import { Route, Switch } from "react-router-dom";
+import { withPreloadRedirect } from '../../hoc/withPreloadRedirect';
 import { compose } from 'redux';
 import { withErrorBoundary } from './../../hoc/withErrorBoundary';
 import { GroupComponent } from './../otherComponent/GroupComponent';
@@ -25,4 +25,4 @@ const ContentPage = () => {
 }
 
 
-export default compose(withErrorBoundary, withAuthRedirect)(ContentPage)
+export default compose(withErrorBoundary, withPreloadRedirect)(ContentPage)

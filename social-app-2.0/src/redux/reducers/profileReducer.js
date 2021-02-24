@@ -1,5 +1,4 @@
 import { userApi } from "../../serverApi/api"
-import { stopSubmit } from 'redux-form';
 
 const SET_PROFILE = "profile/SET_PROFILE"
 

@@ -3,7 +3,6 @@ import { userApi } from './../../serverApi/api';
 const SET_AUTH_DATA = "auth/SET_AUTH_DATA";
 const CLEAR_DATA = "auth/CLEAR_DATA_AUTH"
 const GET_CAPTCHA_SUCCESS = "auth/GET_CAPTCHA_SUCCESS"
-const CLEAR_CAPTCHA = "auth/CLEAR_CAPTCHA"
 
 
 const initialState = {
@@ -19,8 +18,6 @@ let authReducer = (state = initialState, action) => {
     switch (action.type) {
         case SET_AUTH_DATA:
             return { ...state, ...action.data, isLogin: action.isLogin }
-        case GET_CAPTCHA_SUCCESS:
-            return { ...state, captchaUrl: action.captchaUrl }
         case CLEAR_DATA:
             return initialState
         default:
