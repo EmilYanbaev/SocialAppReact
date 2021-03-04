@@ -1,14 +1,18 @@
 const TOGGLE_LEFTSITEBAR = "view/TOGGLE_LEFTSITEBAR"
 const SET_CLIENT_SIZE = "view/SET_CLIENT_SIZE"
+
 const initialState = {
-    widthClient: null,
-    heightClient: null,
+    widthClient: null as number | null,
+    heightClient: null as number | null,
     isView: {
         leftSiteBar: false,
     }
 }
+export type InitialStateType = typeof initialState
 
-const viewReducer = (state = initialState, action) => {
+
+
+const viewReducer = (state = initialState, action: any): InitialStateType => {
     switch (action.type) {
         case TOGGLE_LEFTSITEBAR:
             return { ...state, isView: { ...state.isView, leftSiteBar: !state.isView.leftSiteBar } }
@@ -18,11 +22,14 @@ const viewReducer = (state = initialState, action) => {
             return state;
     }
 }
-
 export default viewReducer;
 
 
-export const toggleLeftSiteBar = () => ({ type: TOGGLE_LEFTSITEBAR })
+
+type ToggleLeftSiteBatAcType = {
+    type: typeof TOGGLE_LEFTSITEBAR
+}
+export const toggleLeftSiteBar = (): ToggleLeftSiteBatAcType => ({ type: TOGGLE_LEFTSITEBAR })
 
 // export const setClientSize = (width, height) => ({ type: SET_CLIENT_SIZE, width, height })
 

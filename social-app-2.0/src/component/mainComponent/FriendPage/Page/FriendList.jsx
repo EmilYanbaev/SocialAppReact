@@ -1,6 +1,6 @@
 import style from "./FriendList.module.css"
 import Friend from './Friend';
-import { GroupComponent } from './../../../otherComponent/GroupComponent';
+import { Button } from './../../../otherComponent/GroupComponent';
 
 let FriendList = (props) => {
 
@@ -23,7 +23,7 @@ let FriendList = (props) => {
         <div className={style.content}>
             {usersJSX}
             <div className={style.wrapp__btn}>
-                <GroupComponent.Button onClick={onClickGetUser}>GET USERS</GroupComponent.Button>
+                <Button onClick={onClickGetUser}>GET USERS</Button>
             </div>
         </div>
     )

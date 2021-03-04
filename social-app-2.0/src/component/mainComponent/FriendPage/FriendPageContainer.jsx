@@ -7,7 +7,7 @@ import { clearData, followUserThunkCreator, updateInputSearch } from '../../../r
 import { getUserThunkCreator } from './../../../redux/reducers/friendsReducer';
 import { getUsers } from '../../../redux/selectors/testSelectors';
 import { withHiddenSiteBar } from './../../../hoc/withHiddenSitebar';
-import { GroupComponent } from './../../otherComponent/GroupComponent';
+import { Preloader } from './../../otherComponent/GroupComponent';
 
 class FriendListContainer extends React.Component {
 
@@ -37,7 +37,7 @@ class FriendListContainer extends React.Component {
     }
     render() {
         if (!this.props.users)
-            return <GroupComponent.Preloader />
+            return <Preloader />
         else
             return (<>
                 <HeaderPage input={this.props.inputValueSearch}

@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 import style from "./Friend.module.css"
-import { GroupComponent } from './../../../otherComponent/GroupComponent';
+import { Button } from './../../../otherComponent/GroupComponent';
 
 
 let Friend = (props) => {
@@ -31,9 +31,9 @@ let Friend = (props) => {
                     </div>
                 </div>
                 <div className = {style.wrapp__btn}>
-                    <GroupComponent.Button onClick={onFollowing} disabled={props.disable} >
+                    <Button onClick={onFollowing} disabled={props.disable} >
                         {!props.user.followed ? "Following" : "unFollowing"}
-                    </GroupComponent.Button>
+                    </Button>
                 </div>
             </div>
         </div>

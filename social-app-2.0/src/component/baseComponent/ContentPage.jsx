@@ -4,7 +4,7 @@ import { Route, Switch } from "react-router-dom";
 import { withPreloadRedirect } from '../../hoc/withPreloadRedirect';
 import { compose } from 'redux';
 import { withErrorBoundary } from './../../hoc/withErrorBoundary';
-import { GroupComponent } from './../otherComponent/GroupComponent';
+import { Preloader } from './../otherComponent/GroupComponent';
 const ProfileContainer = React.lazy(() => import("../mainComponent/ProfilePage/ProfileContainer"));
 const FriendListContainer = React.lazy(() => import('./../mainComponent/FriendPage/FriendPageContainer'));
 const LoginContainer = React.lazy(() => import('./../mainComponent/LoginPage/LoginContainer'));
@@ -12,7 +12,7 @@ const LoginContainer = React.lazy(() => import('./../mainComponent/LoginPage/Log
 const ContentPage = () => {
     return (
         <div className={style.wrapp_content}>
-            <Suspense fallback={<GroupComponent.Preloader />}>
+            <Suspense fallback={<Preloader />}>
                 <Switch>
                     <Route path="/profile/:id?" component={ProfileContainer} />
                     <Route path="/friend" component={FriendListContainer} />

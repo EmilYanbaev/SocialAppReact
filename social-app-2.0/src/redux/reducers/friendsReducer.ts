@@ -1,4 +1,5 @@
-import { userApi } from './../../serverApi/api';
+import { userApi } from '../../serverApi/api';
+import { UserType } from '../../types/commonTypes';
 const UPDATE_INPUT_SEARCH = "friend/UPDATE_INPUT_SEARCH"
 const ENTER_SEARCH = "friend/ENTER_SEARCH"
 const SET_USER = "friend/SET_USER"
@@ -8,16 +9,21 @@ const TOGGLE_DISABLE_USER = "friend/DISABLE_USER"
 const CHANGE_FOLLOW = "friend/CHANGE_FOLLOW"
 const CLEAR_DATA = "friend/CLEAR_DATA_FRIENDLIST"
 
+
+
+
 const initialState = {
     inputValueSearch: "",
     currentPage: 1,
     pageSize: 10,
-    users: [],
+    users: [] as Array<UserType>,
     usersSearchSuccess: false,
-    disableUsers: []
+    disableUsers: [] as Array<number>
 }
+export type InitialStateType = typeof initialState
 
-let friendsReducer = (state = initialState, action) => {
+
+let friendsReducer = (state = initialState, action: any): InitialStateType => {
     switch (action.type) {
         case UPDATE_INPUT_SEARCH:
             return { ...state, inputValueSearch: action.inputValueSearch }
@@ -55,18 +61,61 @@ let friendsReducer = (state = initialState, action) => {
 
 export default friendsReducer
 
-export const updateInputSearch = (inputValueSearch) => ({ type: UPDATE_INPUT_SEARCH, inputValueSearch })
-export const enterSearch = () => ({ type: ENTER_SEARCH })
-export const setUser = (users) => ({ type: SET_USER, users })
-export const setUsersSearchSuccess = (bool) => ({ type: USERS_SEARCH_SUCCESS, usersSearchSuccess: bool })
-export const setCurrentPage = (value) => ({ type: SET_CURRENT_PAGE, currentPage: value })
-export const addDisableUser = (id, add) => ({ type: TOGGLE_DISABLE_USER, id, add })
-export const changeFollow = (id) => ({ type: CHANGE_FOLLOW, id })
-export const clearData = () => ({ type: CLEAR_DATA })
+type UpdateInputSearchAcType = {
+    type: typeof UPDATE_INPUT_SEARCH,
+    inputValueSearch: string
+}
+export const updateInputSearch = (inputValueSearch: string): UpdateInputSearchAcType => ({ type: UPDATE_INPUT_SEARCH, inputValueSearch })
+
+
+type EnterSearchAcType = {
+    type: typeof ENTER_SEARCH
+}
+export const enterSearch = (): EnterSearchAcType => ({ type: ENTER_SEARCH })
+
+
+type SetUserAcType = {
+    type: typeof SET_USER,
+    users: Array<UserType>
+}
+export const setUser = (users: Array<UserType>): SetUserAcType => ({ type: SET_USER, users })
+
+
+type SetUsersSearchSuccessAcType = {
+    type: typeof USERS_SEARCH_SUCCESS,
+    usersSearchSuccess: boolean
+}
+export const setUsersSearchSuccess = (bool: boolean): SetUsersSearchSuccessAcType => ({ type: USERS_SEARCH_SUCCESS, usersSearchSuccess: bool })
+
+
+type SetCurrentPageAcType = {
+    type: typeof SET_CURRENT_PAGE
+    currentPage: number
+}
+export const setCurrentPage = (value: number): SetCurrentPageAcType => ({ type: SET_CURRENT_PAGE, currentPage: value })
+
+
+type addDisableUserAcType = {
+    type: typeof TOGGLE_DISABLE_USER,
+    id: number,
+    add: boolean
+}
+export const addDisableUser = (id: number, add: boolean): addDisableUserAcType => ({ type: TOGGLE_DISABLE_USER, id, add })
+
+type ChangeFollowAcType = {
+    type: typeof CHANGE_FOLLOW,
+    id: number,
+}
+export const changeFollow = (id: number): ChangeFollowAcType => ({ type: CHANGE_FOLLOW, id })
+
+type ClearDataAcType = {
+    type: typeof CLEAR_DATA
+}
+export const clearData = (): ClearDataAcType => ({ type: CLEAR_DATA })
 
 
 export const getUserThunkCreator = (page = 1, pageSize = 10, inputSearch = "") => {
-    return async dispatch => {
+    return async (dispatch: any) => {
 
         let response = await userApi.getUsers(page, pageSize, inputSearch)
         if (!response.error) {
@@ -78,8 +127,8 @@ export const getUserThunkCreator = (page = 1, pageSize = 10, inputSearch = "") =
     }
 }
 
-export const followUserThunkCreator = (id, followed) => {
-    return async dispatch => {
+export const followUserThunkCreator = (id: number, followed: boolean) => {
+    return async (dispatch: any) => {
         dispatch(addDisableUser(id, true))
         await userApi.follow(id, followed)
         dispatch(addDisableUser(id, false))

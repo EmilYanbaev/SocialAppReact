@@ -7,7 +7,7 @@ import { compose } from 'redux';
 import HeaderContainer from './baseComponent/Header/HeaderContainer';
 import { initialize } from './../redux/reducers/generalReducer';
 import { withErrorBoundary } from './../hoc/withErrorBoundary';
-import { GroupComponent } from './otherComponent/GroupComponent';
+import { Preloader } from './otherComponent/GroupComponent';
 
 
 const GeneralContainer = ({ initialized, initialize }) => {
@@ -16,7 +16,7 @@ const GeneralContainer = ({ initialized, initialize }) => {
     }, [])
 
     if (!initialized)
-        return <GroupComponent.Preloader style = {{"height":"100vh"}} />
+        return <Preloader style={{ "height": "100vh" }} />
     else return (
         <div className="generalContainer">
             <HeaderContainer />

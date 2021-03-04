@@ -63,7 +63,7 @@
     align-items: flex-start;
   }
 
-  label {
+  .label {
     margin-bottom: 5px;
     color: #3f414d;
   }

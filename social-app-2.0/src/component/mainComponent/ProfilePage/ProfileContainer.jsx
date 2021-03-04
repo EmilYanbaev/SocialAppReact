@@ -6,7 +6,7 @@ import Profile from "./Page/Profile"
 import { getProfile, clearData, savePhoto, saveProfileInfo } from './../../../redux/reducers/profileReducer';
 import { getProfileSelector } from '../../../redux/selectors/testSelectors';
 import { withHiddenSiteBar } from './../../../hoc/withHiddenSitebar';
-import { GroupComponent } from './../../otherComponent/GroupComponent';
+import { Preloader } from './../../otherComponent/GroupComponent';
 
 let ProfileContainer = (props) => {
     const [viewModal, toggleModal] = useState(false)
@@ -25,7 +25,7 @@ let ProfileContainer = (props) => {
     }
 
     if (!props.profile)
-        return <GroupComponent.Preloader />
+        return <Preloader />
     else
         return (
             <Profile
@@ -33,8 +33,8 @@ let ProfileContainer = (props) => {
                 profile={props.profile}
                 viewModal = {viewModal}
                 toggleModal = {toggleModal.bind(this)}
-                savePhoto={handleSavePhoto.bind(this)}
-                onSubmit={handleSubmit.bind(this)}
+                savePhoto={handleSavePhoto}
+                onSubmit={handleSubmit}
             />)
 }
 
