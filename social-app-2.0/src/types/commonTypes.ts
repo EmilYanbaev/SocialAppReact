@@ -31,3 +31,6 @@ export type UserType = {
     status: string,
     followed: boolean
 }
+
+
+

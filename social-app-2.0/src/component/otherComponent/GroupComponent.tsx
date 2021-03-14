@@ -2,7 +2,7 @@ import preloaderStyle from "./Preloader.module.css"
 import preloader from "../../assets/preloader.gif"
 
 import buttonStyle from "./Button.module.css"
-import { CSSProperties } from "react"
+import { CSSProperties, MouseEvent } from "react"
 
 type PropsTypePreloader = {
     style?:CSSProperties
@@ -16,7 +16,7 @@ export let Preloader: React.FC<PropsTypePreloader> = ({ style }) => {
 
 
 type PropsTypeButton = {
-    onClick?: () => {},
+    onClick?: (event: MouseEvent<HTMLButtonElement>) => void,
     disabled?: boolean,
     type?: any,
     style?: CSSProperties,

@@ -1,28 +1,37 @@
 import style from "./HeaderFriendList.module.css"
-import React from 'react';
+import React, { MouseEvent} from 'react';
 
-class HeaderPage extends React.Component {
 
-    constructor(props) {
+type PropsType = {
+    input:string,
+    updateInput:(value:string)=>void
+    getUsers:(nextPage:boolean)=>void
+}
+
+class HeaderPage extends React.Component<PropsType> {
+
+    private inputSearchRef:React.RefObject<HTMLInputElement>
+
+    constructor(props:PropsType) {
         super(props)
         this.onChange = this.onChange.bind(this)
         this.onClickGetUser = this.onClickGetUser.bind(this)
-        this.inputSearch = React.createRef()
+
+        this.inputSearchRef = React.createRef<HTMLInputElement>()
     }
 
     componentDidMount() {
-        this.inputSearch.current.focus();
+        if(this.inputSearchRef.current)
+        this.inputSearchRef.current.focus();
     }
     // componentDidUpdate() {
     //     this.inputSearch.current.focus();
     // }
 
-    onChange(event) {
-
+    onChange(event:React.ChangeEvent<HTMLInputElement>) {
         this.props.updateInput(event.target.value)
     }
-    onClickGetUser(event) {
-        
+    onClickGetUser(event:MouseEvent<HTMLButtonElement>) {
         event.preventDefault();
         this.props.getUsers(false);
     }
@@ -34,7 +43,7 @@ class HeaderPage extends React.Component {
                         <h2>Friend Lists</h2>
                     </div>
                     <form className={style.search}>
-                        <input ref={this.inputSearch}
+                        <input ref={this.inputSearchRef}
                             value={this.props.input}
                             placeholder="Type here to search"
                             onChange={this.onChange} />
@@ -49,17 +58,3 @@ class HeaderPage extends React.Component {
 }
 
 export default HeaderPage
-
-
-/*{<div className={style.header__title}>
-                    <h2>Friend Lists</h2>
-                </div>
-                <form className={style.search}>
-                    <input ref={this.inputSearch}
-                        value={this.props.input}
-                        placeholder="Type here to search"
-                        onChange={this.onChange} />
-                    <button className={style.btn_srh}
-                        type="submit"
-                        onClick={this.onClickGetUser}>icon</button>
-                </form>}*/

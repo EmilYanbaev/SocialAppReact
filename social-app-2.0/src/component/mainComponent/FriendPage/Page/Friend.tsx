@@ -1,15 +1,25 @@
 import { NavLink } from "react-router-dom";
 import style from "./Friend.module.css"
-import { Button } from './../../../otherComponent/GroupComponent';
+import { Button } from '../../../otherComponent/GroupComponent';
+import { UserType } from "../../../../types/commonTypes";
 
+type PropsType = {
+    user:UserType,
+    disable:boolean
 
-let Friend = (props) => {
+    onFollow:(id:number, followed:boolean)=>void
+}
+
+let Friend:React.FC<PropsType> = (props) => {
     let onFollowing = () => {
-        props.follow(props.user.id, props.user.followed)
+        props.onFollow(props.user.id, props.user.followed)
     }
-    const userStyle = {};
+
+    //Надо зарефакторить
+    let userStyle = {backgroundImage:""}
     if (props.user.photos.small)
         userStyle.backgroundImage = `url("${props.user.photos.small}")`
+    
     return (
 
         <div className={style.card}>

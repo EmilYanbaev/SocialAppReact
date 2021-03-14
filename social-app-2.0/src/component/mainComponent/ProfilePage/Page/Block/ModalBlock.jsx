@@ -1,8 +1,9 @@
 import style from "./ModalBlock.module.css"
 import ModalPortal from '../../../../otherComponent/ModalPortal';
 import { Field, reduxForm } from 'redux-form';
-import { Button } from './../../../../otherComponent/GroupComponent';
-import { isValidURL, required } from './../../../../../utils/validators/validators';
+import { Button } from '../../../../otherComponent/GroupComponent';
+import { isValidURL, required } from '../../../../../utils/validators/validators';
+
 let ModalContainer = (props) => {
     const changeInfo = props.view ? <ChangeInfo profile={props.profile} closeModal={props.closeModal} onSubmit={props.onSubmit} /> : null;
 

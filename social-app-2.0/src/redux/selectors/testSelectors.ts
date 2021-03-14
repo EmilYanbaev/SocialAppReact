@@ -1,9 +1,10 @@
 import { createSelector } from "reselect"
+import { AppStateType } from "../store";
 
 // БЫЛО ПРОПИСАНО ТОЛЬКО РАДИ ПРАКТИКИ
 // В данном случае не было необходимости использовать библиотеку reselect
 
-let getProfileSimpleSelector = (state) => (state.profilePage.profile)
+let getProfileSimpleSelector = (state:AppStateType) => (state.profilePage.profile)
 
 export const getProfileSelector = createSelector(getProfileSimpleSelector, (profile) => {
 
@@ -14,8 +15,8 @@ export const getProfileSelector = createSelector(getProfileSimpleSelector, (prof
 
 })
 
-let getUsersSimpleSelector = (state) => (state.friendsPage.users)
-let getUsersSearchSuccess = (state) => (state.friendsPage.usersSearchSuccess)
+let getUsersSimpleSelector = (state:AppStateType) => (state.friendsPage.users)
+let getUsersSearchSuccess = (state:AppStateType) => (state.friendsPage.usersSearchSuccess)
 
 export const getUsers = createSelector(getUsersSimpleSelector, getUsersSearchSuccess, (users, usersSearchSuccess) => {
     if (usersSearchSuccess) {
