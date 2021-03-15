@@ -1,9 +1,9 @@
 import style from "./InfoBlock.module.css"
 import React, { useState } from 'react';
-import { ProfileType } from "../../../../../types/commonTypes";
+import { FullProfileType, ProfileType } from "../../../../../types/commonTypes";
 
 type PropsType = {
-    profile: ProfileType | null
+    profile: FullProfileType | null
 }
 
 let ProfileInfo: React.FC<PropsType> = ({ profile }) => {

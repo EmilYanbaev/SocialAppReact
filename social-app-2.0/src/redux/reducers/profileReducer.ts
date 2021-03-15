@@ -1,5 +1,5 @@
-import { userApi } from "../../serverApi/api"
-import { PhotosType, ProfileType } from "../../types/commonTypes"
+import { authApi, ResultCode, userApi } from "../../serverApi/api"
+import { FullProfileType, PhotosType, ProfileType } from "../../types/commonTypes"
 import { ThunkAction } from 'redux-thunk';
 import { AppStateType } from "../store";
 
@@ -9,7 +9,7 @@ const CLEAR_DATA_PROFILE = "profile/CLEAR_DATA_PROFILE"
 
 
 const initialState = {
-    profile: null as ProfileType | null
+    profile: null as FullProfileType | null
 }
 export type InitialStateType = typeof initialState
 
@@ -32,9 +32,9 @@ type ActionsTypes = SetProfileAcType | SetPhotoSuccessAcType | ClearDataAcType
 
 type SetProfileAcType = {
     type: typeof SET_PROFILE,
-    profile: ProfileType
+    profile: FullProfileType
 }
-export const setProfile = (profile: ProfileType): SetProfileAcType => ({ type: SET_PROFILE, profile })
+export const setProfile = (profile: FullProfileType): SetProfileAcType => ({ type: SET_PROFILE, profile })
 
 
 type SetPhotoSuccessAcType = {
@@ -54,14 +54,13 @@ type ThunkType = ThunkAction<Promise<void>,AppStateType,unknown,ActionsTypes>
 export const getProfile = (id?: number):ThunkType => {
     return async (dispatch,getState) => {
         if (!id) {
-            debugger;
-            let response = await userApi.getAuth();
-            response = await userApi.getProfile(response.data.data.id)
-            dispatch(setProfile(response.data))
+            let authData = await authApi.getAuth();
+            let meData = await userApi.getProfile(authData.data.id)
+            dispatch(setProfile(meData))
         }
         else {
-            let response = await userApi.getProfile(id)
-            dispatch(setProfile(response.data))
+            let meData = await userApi.getProfile(id)
+            dispatch(setProfile(meData))
         }
     }
 }
@@ -69,14 +68,14 @@ export const getProfile = (id?: number):ThunkType => {
 export const savePhoto = (file: any):ThunkType => {
     return async (dispatch,getState) => {
         let response = await userApi.setMyPhoto(file)
-        if (!response.data.resultCode)
-            dispatch(setPhotoSuccess(response.data.data.photos))
+        if (response.resultCode == ResultCode.Success)
+            dispatch(setPhotoSuccess(response.data))
     }
 }
 
-export const saveProfileInfo = (data: any):ThunkType => {
+export const saveProfileInfo = (data:ProfileType):ThunkType => {
     return async (dispatch,getState) => {
-        let response = await userApi.changeMyInfo(data);
+        await userApi.changeMyInfo(data);
         dispatch(getProfile());
     }
 }

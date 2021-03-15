@@ -16,11 +16,31 @@ export type PhotosType = {
 
 export type ProfileType = {
     userId: number,
-    aboutMe:string
+    aboutMe: string
     lookingForAJob: boolean
     lookingForAJobDescription: string
     fullName: string,
     contacts: ContactsType
+    photos: PhotosType
+}
+
+
+export type FullProfileType = {
+    aboutMe: string
+    userId: number,
+    lookingForAJob: boolean
+    lookingForAJobDescription: string
+    fullName: string
+    contacts: {
+        github: string
+        vk: string
+        facebook: string
+        instagram: string
+        twitter: string
+        website: string
+        youtube: string
+        mainLink: string
+    }
     photos: PhotosType
 }
 
@@ -36,8 +56,8 @@ export type UserType = {
 export type LoginDataType = {
     email: string,
     password: string,
-    rememberMe: boolean,
-    captcha: string
+    rememberMe: null | boolean,
+    captcha: null | string
 }
 
 

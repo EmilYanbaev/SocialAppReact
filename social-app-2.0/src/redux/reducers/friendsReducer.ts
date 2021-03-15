@@ -1,4 +1,3 @@
-import { Dispatch } from 'react';
 import { ThunkAction } from 'redux-thunk';
 import { userApi } from '../../serverApi/api';
 import { UserType } from '../../types/commonTypes';

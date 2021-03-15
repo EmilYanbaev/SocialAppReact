@@ -2,18 +2,18 @@ import style from "./Profile.module.css"
 import InfoBlock from "./Block/InfoBlock";
 import MainBlock from './Block/MainBlock';
 import ModalBlock from './Block/ModalBlock';
-import { ProfileType } from "../../../../types/commonTypes";
+import { FullProfileType, ProfileType } from "../../../../types/commonTypes";
 
 
 
 type PropsType = {
     isOwner: boolean,
-    profile: ProfileType | null
+    profile: FullProfileType | null
     viewModal: boolean,
 
     savePhoto: (file: any) => void,
     toggleModal: (open: boolean) => void,
-    onSubmit: (data: any) => void
+    onSubmit: (data: ProfileType) => void
 }
 
 let Profile: React.FC<PropsType> = (props) => {

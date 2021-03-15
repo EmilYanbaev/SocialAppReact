@@ -20,6 +20,8 @@ type OwnPropsType = {
 
 type PropsType = MapStatePropsType & MapDispatchPropsType & OwnPropsType
 
+
+
 class LoginContainer extends React.Component<PropsType> {
 
     handleSignIn(data:LoginDataType) {

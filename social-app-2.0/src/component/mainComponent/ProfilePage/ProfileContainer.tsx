@@ -9,17 +9,17 @@ import { withHiddenSiteBar } from '../../../hoc/withHiddenSitebar';
 import { Preloader } from '../../otherComponent/GroupComponent';
 import { AppStateType } from '../../../redux/store';
 
-import {ProfileType} from "../../../types/commonTypes"
+import {FullProfileType, ProfileType} from "../../../types/commonTypes"
 
 type MapStateToPropsType = {
     // profile: boolean | ProfileType
-    profile:ProfileType | null
+    profile:FullProfileType | null
 }
 
 type MapDispatchToPropsType = {
     getProfile:(id:number)=>void,
     savePhoto:(file:any)=>void,
-    saveProfileInfo:(data:any)=>void,
+    saveProfileInfo:(data:ProfileType)=>void,
     clearData:()=>void,
 }
 
@@ -40,7 +40,7 @@ let ProfileContainer:React.FC<PropsType> = (props) => {
         return props.clearData();
     }, [props.match.params.id])
 
-    let handleSubmit = (data:any) => {
+    let handleSubmit = (data:ProfileType) => {
         props.saveProfileInfo(data)
     }
 
