@@ -1,6 +1,9 @@
+import { Dispatch } from 'react';
 import { stopSubmit } from 'redux-form';
+import { ThunkAction } from 'redux-thunk';
 import { userApi } from '../../serverApi/api';
 import { LoginDataType } from '../../types/commonTypes';
+import { AppStateType } from '../store';
 const SET_AUTH_DATA = "auth/SET_AUTH_DATA";
 const CLEAR_DATA = "auth/CLEAR_DATA_AUTH"
 const GET_CAPTCHA_SUCCESS = "auth/GET_CAPTCHA_SUCCESS"
@@ -17,7 +20,7 @@ export type InitialStateType = typeof initialState;
 
 
 
-let authReducer = (state = initialState, action: any): InitialStateType => {
+let authReducer = (state = initialState, action: ActionType): InitialStateType => {
     switch (action.type) {
         case SET_AUTH_DATA:
             return { ...state, ...action.data, isLogin: action.isLogin }
@@ -31,6 +34,7 @@ let authReducer = (state = initialState, action: any): InitialStateType => {
 }
 export default authReducer;
 
+type ActionType = SetAuthAcType | SetCaptchaSuccessAcType |  ClearDataAcType
 
 
 type SetAuthAcType = {
@@ -38,6 +42,7 @@ type SetAuthAcType = {
     data: SetAuthData | null
     isLogin: boolean
 }
+
 type SetAuthData = {
     id: number
     email: string
@@ -59,7 +64,7 @@ type ClearDataAcType = {
 export const clearData = (): ClearDataAcType => ({ type: CLEAR_DATA })
 
 
-export let authThunk = async (dispatch: any) => {
+export let authThunk = async (dispatch: Dispatch<ActionType>) => {
     let response = await userApi.getAuth();
     if (response.data.resultCode === 0)
         dispatch(setAuth(response.data.data, true));
@@ -67,19 +72,22 @@ export let authThunk = async (dispatch: any) => {
         dispatch(setAuth(null, false));
 }
 
-export let authThunkCreator = () => {
+
+type ThunkType = ThunkAction<Promise<void>,AppStateType,unknown,ActionType> 
+
+export let authThunkCreator = ():ThunkType=> {
     return authThunk
 }
 
 
-export let getCaptchaThunk = async (dispatch: any) => {
+export let getCaptchaThunk = async (dispatch: Dispatch<ActionType>) => {
     let response = await userApi.getCaptcha();
     dispatch(setCaptchaSuccess(response.data.url));
 }
 
 
 
-export let loginThunkCreator = (data: LoginDataType) => async (dispatch: any) => {
+export let loginThunkCreator = (data: LoginDataType):ThunkType => async (dispatch) => {
     let response = await userApi.login(data);
     if (!response.data.resultCode) {
         dispatch(authThunk)
@@ -95,8 +103,8 @@ export let loginThunkCreator = (data: LoginDataType) => async (dispatch: any) =>
 
 
 
-export let logOutThunkCreator = () => {
-    return async (dispatch: any) => {
+export let logOutThunkCreator = ():ThunkType => {
+    return async (dispatch) => {
         await userApi.logout();
         dispatch(clearData());
         dispatch(authThunk);

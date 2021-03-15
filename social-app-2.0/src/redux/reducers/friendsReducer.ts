@@ -1,5 +1,8 @@
+import { Dispatch } from 'react';
+import { ThunkAction } from 'redux-thunk';
 import { userApi } from '../../serverApi/api';
 import { UserType } from '../../types/commonTypes';
+import { AppStateType } from '../store';
 const UPDATE_INPUT_SEARCH = "friend/UPDATE_INPUT_SEARCH"
 const ENTER_SEARCH = "friend/ENTER_SEARCH"
 const SET_USER = "friend/SET_USER"
@@ -23,7 +26,7 @@ const initialState = {
 export type InitialStateType = typeof initialState
 
 
-let friendsReducer = (state = initialState, action: any): InitialStateType => {
+let friendsReducer = (state = initialState, action: ActionsTypes): InitialStateType => {
     switch (action.type) {
         case UPDATE_INPUT_SEARCH:
             return { ...state, inputValueSearch: action.inputValueSearch }
@@ -58,6 +61,11 @@ let friendsReducer = (state = initialState, action: any): InitialStateType => {
             return state;
     }
 }
+
+type ActionsTypes = UpdateInputSearchAcType | EnterSearchAcType | SetUserAcType |
+    SetUsersSearchSuccessAcType | SetCurrentPageAcType |
+    addDisableUserAcType | ChangeFollowAcType | ClearDataAcType
+
 
 export default friendsReducer
 
@@ -114,8 +122,10 @@ type ClearDataAcType = {
 export const clearData = (): ClearDataAcType => ({ type: CLEAR_DATA })
 
 
-export const getUserThunkCreator = (page = 1, pageSize = 10, inputSearch = "") => {
-    return async (dispatch: any) => {
+type ThunkType = ThunkAction<Promise<void>,AppStateType,unknown,ActionsTypes>
+
+export const getUserThunkCreator = (page: number = 1, pageSize: number = 10, inputSearch: string = ""):ThunkType => {
+    return async (dispatch,getState) => {
 
         let response = await userApi.getUsers(page, pageSize, inputSearch)
         if (!response.error) {
@@ -127,8 +137,8 @@ export const getUserThunkCreator = (page = 1, pageSize = 10, inputSearch = "") =
     }
 }
 
-export const followUserThunkCreator = (id: number, followed: boolean) => {
-    return async (dispatch: any) => {
+export const followUserThunkCreator = (id: number, followed: boolean):ThunkType => {
+    return async (dispatch, getState) => {
         dispatch(addDisableUser(id, true))
         await userApi.follow(id, followed)
         dispatch(addDisableUser(id, false))

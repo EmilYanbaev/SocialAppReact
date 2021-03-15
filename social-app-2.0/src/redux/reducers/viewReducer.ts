@@ -29,6 +29,7 @@ export default viewReducer;
 type ToggleLeftSiteBatAcType = {
     type: typeof TOGGLE_LEFTSITEBAR
 }
+
 export const toggleLeftSiteBar = (): ToggleLeftSiteBatAcType => ({ type: TOGGLE_LEFTSITEBAR })
 
 // export const setClientSize = (width, height) => ({ type: SET_CLIENT_SIZE, width, height })

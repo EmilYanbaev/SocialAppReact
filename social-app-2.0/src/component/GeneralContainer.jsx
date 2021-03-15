@@ -40,24 +40,3 @@ const mapStateToProps = (state) => {
 export default compose(withErrorBoundary,
     connect(mapStateToProps, { initialize: initialize }))
     (GeneralContainer)
-
-
-// class GeneralContainer extends React.Component {
-//     componentDidMount() {
-//         this.props.initialize();
-//     }
-//     render() {
-//         if(!this.props.initialized)
-//         return <Preloader />
-//         else return ( 
-//             <div className="generalContainer">
-//                 <HeaderContainer />
-//                 <div className="wrapper">
-//                     <LeftSiteBar />
-//                     <ContentPage />
-//                     <RightSiteBar />
-//                 </div>
-//             </div>
-//         )
-//     }
-// }
