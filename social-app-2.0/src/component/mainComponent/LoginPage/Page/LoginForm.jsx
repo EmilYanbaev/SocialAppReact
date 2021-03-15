@@ -4,8 +4,8 @@ import { maxLengthCreator, required } from '../../../../utils/validators/validat
 import { Button } from '../../../otherComponent/GroupComponent';
 
 const maxLength = maxLengthCreator(30);
+
 let LoginForm = ({ handleSubmit, captchaUrl, error }) => {
-    debugger;
     return (
         <form className={style.form_group} onSubmit={handleSubmit}>
 
@@ -31,8 +31,8 @@ let LoginForm = ({ handleSubmit, captchaUrl, error }) => {
     )
 }
 
-LoginForm = reduxForm({ form: "login" })(LoginForm)
-export default LoginForm
+
+export default reduxForm({ form: "login" })(LoginForm)
 
 const CreateField = (id, name, component, type, validators, placeholder, text, props) => {
     return (

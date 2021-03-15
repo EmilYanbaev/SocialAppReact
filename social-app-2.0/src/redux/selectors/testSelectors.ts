@@ -7,7 +7,7 @@ import { AppStateType } from "../store";
 let getProfileSimpleSelector = (state:AppStateType) => (state.profilePage.profile)
 
 export const getProfileSelector = createSelector(getProfileSimpleSelector, (profile) => {
-
+    //Зачем я это делаю? Уже не помню! Надо писать комменты!
     for (let key in profile) {
         return profile;
     }

@@ -1,5 +1,6 @@
 import { stopSubmit } from 'redux-form';
 import { userApi } from '../../serverApi/api';
+import { LoginDataType } from '../../types/commonTypes';
 const SET_AUTH_DATA = "auth/SET_AUTH_DATA";
 const CLEAR_DATA = "auth/CLEAR_DATA_AUTH"
 const GET_CAPTCHA_SUCCESS = "auth/GET_CAPTCHA_SUCCESS"
@@ -77,13 +78,8 @@ export let getCaptchaThunk = async (dispatch: any) => {
 }
 
 
-type LoginThunkDataType = {
-    email: string,
-    password: string,
-    rememberMe: boolean,
-    captcha: string
-}
-export let loginThunkCreator = (data: LoginThunkDataType) => async (dispatch: any) => {
+
+export let loginThunkCreator = (data: LoginDataType) => async (dispatch: any) => {
     let response = await userApi.login(data);
     if (!response.data.resultCode) {
         dispatch(authThunk)

@@ -2,21 +2,31 @@ import style from "./Profile.module.css"
 import InfoBlock from "./Block/InfoBlock";
 import MainBlock from './Block/MainBlock';
 import ModalBlock from './Block/ModalBlock';
+import { ProfileType } from "../../../../types/commonTypes";
 
 
 
+type PropsType = {
+    isOwner: boolean,
+    profile: ProfileType | null
+    viewModal: boolean,
 
-let Profile = (props) => {
+    savePhoto: (file: any) => void,
+    toggleModal: (open: boolean) => void,
+    onSubmit: (data: any) => void
+}
+
+let Profile: React.FC<PropsType> = (props) => {
 
     return (
         <div className={style.container}>
 
-            <MainBlock isOwner = {props.isOwner} photos={props.profile.photos} savePhoto={props.savePhoto} openModal={() => { props.toggleModal(true) }} />
+            <MainBlock isOwner={props.isOwner} photos={props.profile?.photos} savePhoto={props.savePhoto} openModal={() => { props.toggleModal(true) }} />
 
             <InfoBlock profile={props.profile} />
 
-            <ModalBlock profile={props.profile} closeModal={() => { props.toggleModal(false) }} view={props.viewModal} onSubmit = {props.onSubmit} />
-            
+            <ModalBlock profile={props.profile} closeModal={() => { props.toggleModal(false) }} view={props.viewModal} onSubmit={props.onSubmit} />
+
         </div>
     )
 }

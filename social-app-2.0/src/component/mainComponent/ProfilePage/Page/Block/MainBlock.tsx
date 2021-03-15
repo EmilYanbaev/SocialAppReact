@@ -3,15 +3,15 @@ import { Button } from "../../../../otherComponent/GroupComponent";
 import { PhotosType } from "../../../../../types/commonTypes";
 
 type PropsType = {
-    isOwner:boolean,
-    photos:PhotosType,
-    savePhoto:any,
-    openModal:()=>void
+    isOwner: boolean,
+    photos: PhotosType|undefined,
+    savePhoto: (file:any)=>void,
+    openModal: () => void
 }
 
-let MainBlockProfile:React.FC<PropsType> = ({isOwner,photos,savePhoto,openModal}) => {
+let MainBlockProfile: React.FC<PropsType> = ({ isOwner, photos, savePhoto, openModal }) => {
 
-    let onSavePhoto = (event:any) => {
+    let onSavePhoto = (event: any) => {
         savePhoto(event.target.files[0])
     }
 
@@ -34,10 +34,11 @@ let MainBlockProfile:React.FC<PropsType> = ({isOwner,photos,savePhoto,openModal}
                         </button>
                 </div>
             </div>}
-
-            <Button style={{ "width": "100%" }}>
-                MESSAGE
-            </Button>
+            { !isOwner &&
+                <Button style={{ "width": "100%" }}>
+                    MESSAGE
+                </Button>
+            }
         </div>
     )
 }

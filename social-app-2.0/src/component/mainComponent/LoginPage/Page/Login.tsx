@@ -1,9 +1,14 @@
+import { LoginDataType } from "../../../../types/commonTypes";
 import style from "./Login.module.css"
 import LoginForm from './LoginForm';
 
 
+type PropsType = {
+    signIn: (data: LoginDataType) => void,
+    captchaUrl: string | null
+}
 
-let Login = ({ signIn,captchaUrl}) => {
+let Login: React.FC<PropsType> = ({ signIn, captchaUrl }) => {
     return (
         <div className={style.loginPage}>
             <div className={style.container}>
@@ -11,8 +16,8 @@ let Login = ({ signIn,captchaUrl}) => {
                     <h1>Sign In</h1>
                     <p>Enter your email address and password to access user panel.</p>
                 </div>
-
-                <LoginForm onSubmit={signIn} captchaUrl={captchaUrl} />
+                {//@ts-ignore
+                    <LoginForm onSubmit={signIn} captchaUrl={captchaUrl} />}
             </div>
         </div>
     )

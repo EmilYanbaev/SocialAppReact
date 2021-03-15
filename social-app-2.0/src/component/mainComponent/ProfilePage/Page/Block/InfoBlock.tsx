@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { ProfileType } from "../../../../../types/commonTypes";
 
 type PropsType = {
-    profile: ProfileType
+    profile: ProfileType | null
 }
 
 let ProfileInfo: React.FC<PropsType> = ({ profile }) => {
@@ -11,17 +11,17 @@ let ProfileInfo: React.FC<PropsType> = ({ profile }) => {
     return (
         <div className={style.userInfo}>
             <div className={style.userInfo__fullName}>
-                {profile.fullName}
+                {profile?.fullName}
             </div>
             <div className={style.userInfo_item}>
                 <p className={style.userInfo_item__columnLeft}>About me:</p>
-                <p className={style.userInfo_item__columnRight}>{profile.aboutMe}</p>
+                <p className={style.userInfo_item__columnRight}>{profile?.aboutMe}</p>
             </div>
             <div className={style.userInfo_item}>
                 <p className={style.userInfo_item__columnLeft}>Looking for a job:</p>
-                <p className={style.userInfo_item__columnRight}>{profile.lookingForAJob ? "Yes" : "No"}</p>
+                <p className={style.userInfo_item__columnRight}>{profile?.lookingForAJob ? "Yes" : "No"}</p>
             </div>
-            { profile.lookingForAJob && <div className={style.userInfo_item}>
+            { profile?.lookingForAJob && <div className={style.userInfo_item}>
                 <p className={style.userInfo_item__columnLeft}>Looking for a job description:</p>
                 <p className={style.userInfo_item__columnRight}>{profile.lookingForAJobDescription}</p>
             </div>}
@@ -30,11 +30,11 @@ let ProfileInfo: React.FC<PropsType> = ({ profile }) => {
             { viewContacts && <div className={style.contacts}>
                 <div className={style.userInfo_item}>
                     <p className={style.userInfo_item__columnLeft}>VK:</p>
-                    <p className={style.userInfo_item__columnRight}>{profile.contacts.vk}</p>
+                    <p className={style.userInfo_item__columnRight}>{profile?.contacts.vk}</p>
                 </div>
                 <div className={style.userInfo_item}>
                     <p className={style.userInfo_item__columnLeft}>GitHub</p>
-                    <p className={style.userInfo_item__columnRight}>{profile.contacts.github}</p>
+                    <p className={style.userInfo_item__columnRight}>{profile?.contacts.github}</p>
                 </div>
             </div>
             }
